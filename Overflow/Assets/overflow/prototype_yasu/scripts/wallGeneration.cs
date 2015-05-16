@@ -13,8 +13,6 @@ public class wallGeneration : MonoBehaviour {
 	public int levelHeight = 40;
 
 	public float simpleChance = 0.4f;
-
-	GameObject[,] cubeArr = new GameObject[8,8];
 	
 	void Start(){
 		// check if level height input is legit
