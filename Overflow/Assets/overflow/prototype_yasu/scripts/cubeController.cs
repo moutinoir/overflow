@@ -18,10 +18,15 @@ public class cubeController : MonoBehaviour {
 	
 	void FixedUpdate(){
 		if (kinematic == false) {
-			if (RB.velocity == Vector3.zero) {
-				nonMovingCount++;
+			if (RB.velocity.y <= 0f && RB.velocity.y > -0.01f) {
 
-				if (nonMovingCount > 5){
+				nonMovingCount++;
+				foreach (Transform child in this.transform)
+				{
+					child.GetComponent<Renderer>().material.color = Color.yellow;
+				}
+
+				if (nonMovingCount > 15){
 					RB.isKinematic = true;
 					kinematic = true;
 
@@ -41,7 +46,13 @@ public class cubeController : MonoBehaviour {
 				}
 			}
 
-			else nonMovingCount = 0;
+			else {
+				nonMovingCount = 0;
+				foreach (Transform child in this.transform)
+				{
+					child.GetComponent<Renderer>().material.color = Color.white;
+				}
+			}
 		}
 	}
 }

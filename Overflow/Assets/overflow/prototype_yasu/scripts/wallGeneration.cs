@@ -24,7 +24,6 @@ public class wallGeneration : MonoBehaviour {
 			generateLevel ();
 		} else
 			Debug.Log ("ERROR: level height input wrong!");
-
 	}
 
 	void generateLevel(){
