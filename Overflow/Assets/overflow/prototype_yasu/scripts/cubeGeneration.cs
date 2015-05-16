@@ -17,7 +17,7 @@ public class cubeGeneration : MonoBehaviour {
 		if (Input.GetMouseButtonDown(0)){
 			int x = Random.Range(0, 7);
 			int y = Random.Range(0, 7);
-			Debug.Log ("cubeGenerator wants to create new cube at: " + x + "," + y);
+			//Debug.Log ("cubeGenerator wants to create new cube at: " + x + "," + y);
 
 			Vector3 spawnPosition = new Vector3(x, 20f, y);
 			
@@ -26,7 +26,7 @@ public class cubeGeneration : MonoBehaviour {
 			
 			cubeArr[x,y] = cube;
 
-			Debug.Log ("cube created at: " + x + "," + y);
+			//Debug.Log ("cube created at: " + x + "," + y);
 		}
 	}
 }
