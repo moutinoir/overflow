@@ -3,30 +3,28 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class cubeGeneration : MonoBehaviour {
-	
+
+	// load cubepresets, later different kinds
 	public GameObject cubePrefab;
-	public float spawnRange = 2f;
-	public int maxPrefabs = 100;
 
+	// setup cube generator grid 8x8
 	GameObject[,] cubeArr = new GameObject[8,8];
-	
-	void Start(){
+
+	public void enableMe(int levelHeight){
+		InvokeRepeating ("spawnCube", 1f, 0.1f);
+		Vector3 myPosition = new Vector3 (this.transform.position.x, levelHeight + 10, this.transform.position.z);
+		this.transform.position = myPosition;
 	}
-	
-	void Update() {
-		if (Input.GetMouseButtonDown(0)){
-			int x = Random.Range(0, 7);
-			int y = Random.Range(0, 7);
-			//Debug.Log ("cubeGenerator wants to create new cube at: " + x + "," + y);
 
-			Vector3 spawnPosition = new Vector3(x, 20f, y);
-			
-			GameObject cube = Instantiate(cubePrefab, spawnPosition, Quaternion.identity) as GameObject;
-			cube.transform.SetParent(this.transform);
-			
-			cubeArr[x,y] = cube;
+	void spawnCube() {
+		int x = Random.Range(0, 7);
+		int z = Random.Range(0, 7);
 
-			//Debug.Log ("cube created at: " + x + "," + y);
-		}
+		Vector3 spawnPosition = new Vector3(x-3, this.transform.position.y, z-3);
+		
+		GameObject cube = Instantiate(cubePrefab, spawnPosition, Quaternion.identity) as GameObject;
+		cube.transform.SetParent(this.transform);
+		
+		cubeArr[x,z] = cube;
 	}
 }
