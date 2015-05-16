@@ -3,6 +3,8 @@ using System.Collections;
 
 public class cubeController : MonoBehaviour {
 
+	float warningDistance = 100f;
+
 	Rigidbody RB;
 
 	bool kinematic = false;
@@ -18,13 +20,23 @@ public class cubeController : MonoBehaviour {
 	
 	void FixedUpdate(){
 		if (kinematic == false) {
+
+			RaycastHit hit;
+			Physics.Raycast (this.transform.position, -Vector3.up, out hit, warningDistance);
+
+			if (hit.collider != null) {
+				
+				if (hit.transform.tag == "Stone") {
+					foreach (Transform child in hit.transform)
+					{
+						child.GetComponent<Renderer>().material.color = new Color(1.0f - ((this.transform.position.y - hit.transform.position.y)/60f), 0.0f, 0.0f);
+					}
+				} 
+			}
+
 			if (RB.velocity.y <= 0f && RB.velocity.y > -0.01f) {
 
 				nonMovingCount++;
-				foreach (Transform child in this.transform)
-				{
-					child.GetComponent<Renderer>().material.color = Color.yellow;
-				}
 
 				if (nonMovingCount > 15){
 					RB.isKinematic = true;
@@ -37,22 +49,25 @@ public class cubeController : MonoBehaviour {
 					                                Mathf.RoundToInt(this.transform.position.z));
 
 					this.transform.position = adjustedPosition;
-
-					Color myColor = new Color(0f, 0f, Random.value);
-					foreach (Transform child in this.transform)
-					{
-						child.GetComponent<Renderer>().material.color = Color.green;
-					}
 				}
 			}
 
 			else {
 				nonMovingCount = 0;
-				foreach (Transform child in this.transform)
-				{
-					child.GetComponent<Renderer>().material.color = Color.white;
-				}
 			}
+
+
+		
 		}
 	}
+
+	/*
+	void OnCollisionEnter(Collision collision) {
+	    foreach (ContactPoint contact in collision.contacts) {
+	        Debug.DrawRay(contact.point, contact.normal, Color.white);
+	    }
+	    if (collision.relativeVelocity.magnitude > 2)
+	        audio.Play();
+    }
+	 */
 }
