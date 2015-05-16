@@ -41,7 +41,7 @@ public class cubeGeneration : MonoBehaviour {
 
 	Quaternion genQuaternion(){
 		int r = Random.Range (0, 5);
-		Quaternion q;
+		Quaternion q = Quaternion.LookRotation (Vector3.forward);
 
 		switch (r) {
 			case 0: q = Quaternion.LookRotation (Vector3.up); break;
@@ -50,6 +50,7 @@ public class cubeGeneration : MonoBehaviour {
 			case 3: q = Quaternion.LookRotation (Vector3.right); break;
 			case 4: q = Quaternion.LookRotation (Vector3.back); break;
 			case 5: q = Quaternion.LookRotation (Vector3.forward); break;
+			default: break;
 		}
 
 		return q;
