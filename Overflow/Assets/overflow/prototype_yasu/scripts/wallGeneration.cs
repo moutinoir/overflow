@@ -13,6 +13,10 @@ public class wallGeneration : MonoBehaviour {
 	public int levelHeight = 40;
 
 	public float simpleChance = 0.4f;
+
+	public float towerOffsetX = 3.5f;
+	public float towerOffsetY = -0.5f;
+	public float towerOffsetZ = 3.5f;
 	
 	void Start(){
 		// check if level height input is legit
@@ -24,7 +28,7 @@ public class wallGeneration : MonoBehaviour {
 	}
 
 	void generateLevel(){
-		GameObject wall = Instantiate(wallStartPrefabs[Random.Range(0, wallStartPrefabs.Length)], Vector3.zero, Quaternion.identity) as GameObject;
+		GameObject wall = Instantiate(wallStartPrefabs[Random.Range(0, wallStartPrefabs.Length)], new Vector3(towerOffsetX, towerOffsetY, towerOffsetZ), Quaternion.identity) as GameObject;
 		wall.transform.SetParent(this.transform);
 
 		for (int curHeight = 5; (curHeight + 5) < levelHeight; ) {
@@ -32,7 +36,7 @@ public class wallGeneration : MonoBehaviour {
 
 			if ((curHeight + 10) < levelHeight && curDoubleChance > simpleChance){
 				int wallNumber = Random.Range (0, wallDoublePrefabs.Length);
-				Vector3 spawnPosition = new Vector3 (0f, curHeight, 0f);
+				Vector3 spawnPosition = new Vector3 (towerOffsetX, curHeight + towerOffsetY, towerOffsetZ);
 
 				wall = Instantiate(wallDoublePrefabs[wallNumber], spawnPosition, Quaternion.identity) as GameObject;
 				wall.transform.SetParent(this.transform);
@@ -48,7 +52,7 @@ public class wallGeneration : MonoBehaviour {
 
 			else {
 				int wallNumber = Random.Range (0, wallSimplePrefabs.Length);
-				Vector3 spawnPosition = new Vector3 (0f, curHeight, 0f);
+				Vector3 spawnPosition = new Vector3 (towerOffsetX, curHeight + towerOffsetY, towerOffsetZ);
 				
 				wall = Instantiate(wallSimplePrefabs[wallNumber], spawnPosition, Quaternion.identity) as GameObject;
 				wall.transform.SetParent(this.transform);
@@ -63,7 +67,7 @@ public class wallGeneration : MonoBehaviour {
 			}
 		}
 
-		wall = Instantiate(wallEndPrefabs[Random.Range(0, wallEndPrefabs.Length)], new Vector3(0f, levelHeight - 5, 0f), Quaternion.identity) as GameObject;
+		wall = Instantiate(wallEndPrefabs[Random.Range(0, wallEndPrefabs.Length)], new Vector3(towerOffsetX, levelHeight - 5 + towerOffsetY, towerOffsetZ), Quaternion.identity) as GameObject;
 		wall.transform.SetParent(this.transform);
 
 		GameObject.Find ("cubeGenerator").GetComponent<cubeGeneration> ().enableMe (levelHeight);

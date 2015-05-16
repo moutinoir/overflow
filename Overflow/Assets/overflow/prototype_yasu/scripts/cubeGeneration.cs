@@ -9,22 +9,24 @@ public class cubeGeneration : MonoBehaviour {
 	
 	public int DEBUG_cubeCount = 0;
 
+	public float timeBetweenSpawns = 0.5f;
+
 	// setup cube generator grid 8x8
 	GameObject[,] cubeGrid = new GameObject[8,8];
 
 	public void enableMe(int levelHeight){
-		InvokeRepeating ("spawnCube", 1f, 0.1f);
+		Invoke ("spawnCube", 1f);
 		Vector3 myPosition = new Vector3 (this.transform.position.x, levelHeight + 10, this.transform.position.z);
 		this.transform.position = myPosition;
 	}
 
 	void spawnCube() {
 		// generate a random spawn position
-		int x = Random.Range(0, 7);
-		int z = Random.Range(0, 7);
+		int x = Random.Range(0, 8);
+		int z = Random.Range(0, 8);
 
 		// set the final spawn position using generators position
-		Vector3 spawnPosition = new Vector3(x-3, this.transform.position.y, z-3);
+		Vector3 spawnPosition = new Vector3(x, this.transform.position.y, z);
 
 		// instantiate a random cube from the cube prefabs array
 		GameObject cube = Instantiate(cubePrefabs[Random.Range (0, cubePrefabs.Length)], spawnPosition, genQuaternion()) as GameObject;
@@ -37,6 +39,8 @@ public class cubeGeneration : MonoBehaviour {
 
 		// increment the DEBUG cube count
 		DEBUG_cubeCount++;
+
+		Invoke ("spawnCube", timeBetweenSpawns);
 	}
 
 	Quaternion genQuaternion(){
