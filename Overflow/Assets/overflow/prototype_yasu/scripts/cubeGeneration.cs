@@ -7,6 +7,9 @@ public class cubeGeneration : MonoBehaviour {
 	// load cubepresets, later different kinds
 	public GameObject cubePrefab;
 
+	[SerializeField]
+	int cubeCount = 0;
+
 	// setup cube generator grid 8x8
 	GameObject[,] cubeArr = new GameObject[8,8];
 
@@ -24,6 +27,8 @@ public class cubeGeneration : MonoBehaviour {
 		
 		GameObject cube = Instantiate(cubePrefab, spawnPosition, Quaternion.identity) as GameObject;
 		cube.transform.SetParent(this.transform);
+
+		cubeCount++;
 		
 		cubeArr[x,z] = cube;
 	}

@@ -14,9 +14,6 @@ public class wallGeneration : MonoBehaviour {
 
 	public float simpleChance = 0.4f;
 
-	// counter for level generation
-	int curHeight = 0;
-	
 	GameObject[,] cubeArr = new GameObject[8,8];
 	
 	void Start(){
@@ -29,20 +26,19 @@ public class wallGeneration : MonoBehaviour {
 	}
 
 	void generateLevel(){
-		Instantiate(wallStartPrefabs[Random.Range(0, wallStartPrefabs.Length)], Vector3.zero, Quaternion.identity);
+		GameObject wall = Instantiate(wallStartPrefabs[Random.Range(0, wallStartPrefabs.Length)], Vector3.zero, Quaternion.identity) as GameObject;
+		wall.transform.SetParent(this.transform);
 
-		curHeight += 5;
-
-		int while_debug = 0;
-
-		while (while_debug < 20) {
+		for (int curHeight = 5; (curHeight + 5) < levelHeight; ) {
 			float curDoubleChance = Random.value;
 
 			if ((curHeight + 10) < levelHeight && curDoubleChance > simpleChance){
 				int wallNumber = Random.Range (0, wallDoublePrefabs.Length);
 				Vector3 spawnPosition = new Vector3 (0f, curHeight, 0f);
 
-				GameObject wall = Instantiate(wallDoublePrefabs[wallNumber], spawnPosition, Quaternion.identity) as GameObject;
+				wall = Instantiate(wallDoublePrefabs[wallNumber], spawnPosition, Quaternion.identity) as GameObject;
+				wall.transform.SetParent(this.transform);
+
 				Color myColor = new Color(0f, 0f, Random.value);
 				foreach (Transform child in wall.transform)
 				{
@@ -52,11 +48,13 @@ public class wallGeneration : MonoBehaviour {
 				curHeight += 10;
 			}
 
-			else if ((curHeight) + 5 < levelHeight){
+			else {
 				int wallNumber = Random.Range (0, wallSimplePrefabs.Length);
 				Vector3 spawnPosition = new Vector3 (0f, curHeight, 0f);
 				
-				GameObject wall = Instantiate(wallSimplePrefabs[wallNumber], spawnPosition, Quaternion.identity) as GameObject;
+				wall = Instantiate(wallSimplePrefabs[wallNumber], spawnPosition, Quaternion.identity) as GameObject;
+				wall.transform.SetParent(this.transform);
+
 				Color myColor = new Color(Random.value, 0f, 0f);
 				foreach (Transform child in wall.transform)
 				{
@@ -65,16 +63,10 @@ public class wallGeneration : MonoBehaviour {
 				
 				curHeight += 5;
 			}
-
-			if (curHeight >= levelHeight){
-				break;
-			}
-
-			while_debug++;
 		}
-		Debug.Log ("WHILE left in " + while_debug + " runs!");
 
-		Instantiate(wallEndPrefabs[Random.Range(0, wallEndPrefabs.Length)], new Vector3(0f, curHeight, 0f), Quaternion.identity);
+		wall = Instantiate(wallEndPrefabs[Random.Range(0, wallEndPrefabs.Length)], new Vector3(0f, levelHeight - 5, 0f), Quaternion.identity) as GameObject;
+		wall.transform.SetParent(this.transform);
 
 		GameObject.Find ("cubeGenerator").GetComponent<cubeGeneration> ().enableMe (levelHeight);
 	}
