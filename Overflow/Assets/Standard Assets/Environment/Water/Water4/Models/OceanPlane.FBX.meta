@@ -1,7 +1,5 @@
 fileFormatVersion: 2
-guid: ad5ae26fefeeb6648bc2d2040771575d
-timeCreated: 1431788674
-licenseType: Free
+guid: 8757009ff1266644a93389a7856403f1
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
@@ -9,14 +7,15 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Group45183
-    9500000: //RootNode
+    4300000: kraut_plane
+    4300002: OceanPlane
+    11100000: //RootNode
   materials:
     importMaterials: 1
-    materialName: 0
+    materialName: 1
     materialSearch: 1
   animations:
-    legacyGenerateAnimations: 4
+    legacyGenerateAnimations: 3
     bakeSimulation: 0
     optimizeGameObjects: 0
     motionNodeName: 
@@ -36,7 +35,7 @@ ModelImporter:
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
-    useFileUnits: 1
+    useFileUnits: 0
     optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
@@ -44,7 +43,7 @@ ModelImporter:
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
-    useFileScale: 1
+    useFileScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     splitTangentsAcrossUV: 1
@@ -64,7 +63,7 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 1
   additionalBone: 0
   userData: 
   assetBundleName: 

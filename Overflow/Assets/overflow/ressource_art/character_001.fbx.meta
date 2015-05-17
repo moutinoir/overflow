@@ -1,16 +1,28 @@
 fileFormatVersion: 2
-guid: ad5ae26fefeeb6648bc2d2040771575d
-timeCreated: 1431788674
+guid: 1b0f03ad8259982489f8f0ada8ed9ec3
+timeCreated: 1431828337
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Group61004
+    100004: joint1
+    100006: joint2
+    100008: joint3
+    100010: ZBrush_defualt_group
     400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: Group45183
+    400002: Group61004
+    400004: joint1
+    400006: joint2
+    400008: joint3
+    400010: ZBrush_defualt_group
+    2300000: Group61004
+    3300000: Group61004
+    4300000: Group61004
+    4300002: ZBrush_defualt_group
     9500000: //RootNode
+    13700000: ZBrush_defualt_group
   materials:
     importMaterials: 1
     materialName: 0
