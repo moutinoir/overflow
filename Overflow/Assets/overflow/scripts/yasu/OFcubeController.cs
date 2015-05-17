@@ -1,13 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class cubeController : MonoBehaviour {
+public class OFcubeController : MonoBehaviour {
+
+	public GameObject prefabWarning;
+
+	public GameObject prefabHit;
 
 	float warningDistance = 100f;
 
 	Rigidbody RB;
 
 	bool kinematic = false;
+
+	bool warned = false;
 
 	int nonMovingCount = 0;
 
@@ -27,10 +33,18 @@ public class cubeController : MonoBehaviour {
 			if (hit.collider != null) {
 				
 				if (hit.transform.tag == "Stone") {
+
 					foreach (Transform child in hit.transform)
 					{
 						child.GetComponent<Renderer>().material.color = new Color(1.0f - ((this.transform.position.y - hit.transform.position.y)/60f), 0.0f, 0.0f);
 					}
+
+					/*
+					if (warned == false){
+						warned = true;
+						Instantiate(prefabWarning, new Vector3(hit.transform.position.x, hit.transform.position.y + 0.5f, hit.transform.position.z), Quaternion.identity);
+					}
+					*/
 				} 
 			}
 
@@ -69,5 +83,5 @@ public class cubeController : MonoBehaviour {
 	    if (collision.relativeVelocity.magnitude > 2)
 	        audio.Play();
     }
-	 */
+	*/
 }
