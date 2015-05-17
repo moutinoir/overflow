@@ -5,11 +5,6 @@ public class PlaneUP : MonoBehaviour {
 
 	public float speed;
 
-	// Use this for initialization
-	void Start () {
-
-	}
-	
 	// Update is called once per frame
 	void Update () {
 
@@ -18,15 +13,13 @@ public class PlaneUP : MonoBehaviour {
 
 	}
 
-	private void OnCollisionEnter (Collision collision){
+	void OnCollisionEnter (Collision collision){
 
 		// collision
-		print ("collision OK!! \n");
+		Debug.Log ("collision OK!!");
 		// only "Player" destroy
 		if(collision.gameObject.CompareTag("Player")){
 			Destroy(collision.gameObject);
 		}
-
 	}
-
 }
