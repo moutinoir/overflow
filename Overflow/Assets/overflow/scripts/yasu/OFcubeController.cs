@@ -7,6 +7,8 @@ public class OFcubeController : MonoBehaviour {
 	public LayerMask mask;
 	public GameObject prefabHit;
 
+	public GameObject gameOverPrefab;
+
 	float warningDistance = 100f;
 
 	Rigidbody RB;
@@ -85,6 +87,8 @@ public class OFcubeController : MonoBehaviour {
 			if(collision.gameObject.transform.position.y < transform.position.y)
 			{
 				Destroy(collision.gameObject);
+				
+				Instantiate (gameOverPrefab, Vector3.zero, Quaternion.identity);
 			}
 		}
 	}
