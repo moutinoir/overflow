@@ -16,11 +16,31 @@ public class OFcubeGenerator : MonoBehaviour {
 	
 	// setup cube generator grid 8x8
 	int[,] cubeGrid = new int[8,8];
-	
+
 	public void enableMe(int levelHeight){
+		createBaseCubes();
+
 		Invoke ("spawnCube", 1f);
 		Vector3 myPosition = new Vector3 (this.transform.position.x, levelHeight + 10, this.transform.position.z);
 		this.transform.position = myPosition;
+	}
+
+	void createBaseCubes(){
+		for (int i = 0; i < 8; i++)
+		{
+			for (int j = 0; j < 8; j++) {
+				GameObject cube = Instantiate(cubePrefabs[Random.Range (0, cubePrefabs.Length)], new Vector3(Mathf.RoundToInt(i), 0f, Mathf.RoundToInt(j)), genQuaternion()) as GameObject;
+
+				// save the grid location of the cube in the cube grid array
+				cubeGrid[Mathf.RoundToInt(i), Mathf.RoundToInt(j)]++;
+				
+				// parent the cube to the cubeGenerator
+				//cube.transform.SetParent(this.transform);
+			}
+
+			// increment the DEBUG cube count
+			DEBUG_cubeCount++;
+		}
 	}
 	
 	void spawnCube() {
