@@ -8,6 +8,7 @@ public class OFwallGenerator : MonoBehaviour {
 	public GameObject[] wallSimplePrefabs;	// level mids, 5m height
 	public GameObject[] wallDoublePrefabs;	// level mids, 10m height
 	public GameObject[] wallEndPrefabs;		// level ends, whatever m height
+	public GameObject waterfallPrefab;
 	
 	// set level height before generation
 	public int levelHeight = 40;
@@ -37,7 +38,7 @@ public class OFwallGenerator : MonoBehaviour {
 				int wallNumber = Random.Range (0, wallDoublePrefabs.Length);
 				Vector3 spawnPosition = new Vector3 (towerOffsetX, curHeight + towerOffsetY, towerOffsetZ);
 				
-				wall = Instantiate(wallDoublePrefabs[wallNumber], spawnPosition, Quaternion.identity) as GameObject;
+				wall = Instantiate(wallDoublePrefabs[wallNumber], spawnPosition, genQuaternion()) as GameObject;
 				wall.transform.SetParent(this.transform);
 				
 				Color myColor = new Color(0f, 0f, Random.value);
@@ -53,7 +54,7 @@ public class OFwallGenerator : MonoBehaviour {
 				int wallNumber = Random.Range (0, wallSimplePrefabs.Length);
 				Vector3 spawnPosition = new Vector3 (towerOffsetX, curHeight + towerOffsetY, towerOffsetZ);
 				
-				wall = Instantiate(wallSimplePrefabs[wallNumber], spawnPosition, Quaternion.identity) as GameObject;
+				wall = Instantiate(wallSimplePrefabs[wallNumber], spawnPosition, genQuaternion()) as GameObject;
 				wall.transform.SetParent(this.transform);
 				
 				Color myColor = new Color(Random.value, 0f, 0f);
@@ -70,5 +71,26 @@ public class OFwallGenerator : MonoBehaviour {
 		wall.transform.SetParent(this.transform);
 		
 		GameObject.Find ("cubeGenerator").GetComponent<OFcubeGenerator> ().enableMe (levelHeight);
+
+		createWaterfall ();
+	}
+
+	void createWaterfall(){
+		Instantiate(waterfallPrefab, new Vector3(towerOffsetX, levelHeight + towerOffsetY - 5f, towerOffsetZ), Quaternion.identity);
+	}
+
+	Quaternion genQuaternion(){
+		int r = Random.Range (0, 3);
+		Quaternion q = Quaternion.LookRotation (Vector3.forward);
+		
+		switch (r) {
+		case 1: q = Quaternion.LookRotation (Vector3.left); break;
+		case 2: q = Quaternion.LookRotation (Vector3.right); break;
+		case 3: q = Quaternion.LookRotation (Vector3.back); break;
+		case 4: q = Quaternion.LookRotation (Vector3.forward); break;
+		default: break;
+		}
+		
+		return q;
 	}
 }
