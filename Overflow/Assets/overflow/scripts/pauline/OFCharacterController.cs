@@ -6,6 +6,8 @@ public class OFCharacterController : MonoBehaviour
 {
 	public Animator animator;
 
+	public AudioSource jumpAS;
+
 	public float MoveSpeed = 0;
 	public float TurnSpeed = 2;
 	public float GravityScale = 1;
@@ -15,6 +17,7 @@ public class OFCharacterController : MonoBehaviour
 	CharacterController motionController;
 	float jumpTime = 0;
 	bool isJumping = false;
+
 	// Use this for initialization
 	void Awake () 
 	{
@@ -40,6 +43,7 @@ public class OFCharacterController : MonoBehaviour
 			if(inputDevice.Action1)
 			{
 				isJumping = true;
+				jumpAS.Play();
 			}
 
 			animator.SetBool("jumping", isJumping);
@@ -55,6 +59,5 @@ public class OFCharacterController : MonoBehaviour
 		Vector3 gravity = -Vector3.up * GravityScale;
 		transform.Rotate(new Vector3(0,(inputDevice.LeftStickX + inputDevice.RightStickX) * TurnSpeed, 0));
 		motionController.Move((forward + gravity + jump)*Time.deltaTime);
-
 	}
 }

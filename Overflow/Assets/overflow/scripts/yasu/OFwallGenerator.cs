@@ -40,12 +40,14 @@ public class OFwallGenerator : MonoBehaviour {
 				
 				wall = Instantiate(wallDoublePrefabs[wallNumber], spawnPosition, genQuaternion()) as GameObject;
 				wall.transform.SetParent(this.transform);
-				
+
+				/*
 				Color myColor = new Color(0f, 0f, Random.value);
 				foreach (Transform child in wall.transform)
 				{
 					child.GetComponent<Renderer>().material.color = myColor;
 				}
+				*/
 				
 				curHeight += 10;
 			}
@@ -56,12 +58,14 @@ public class OFwallGenerator : MonoBehaviour {
 				
 				wall = Instantiate(wallSimplePrefabs[wallNumber], spawnPosition, genQuaternion()) as GameObject;
 				wall.transform.SetParent(this.transform);
-				
+
+				/*
 				Color myColor = new Color(Random.value, 0f, 0f);
 				foreach (Transform child in wall.transform)
 				{
 					child.GetComponent<Renderer>().material.color = myColor;
 				}
+				*/
 				
 				curHeight += 5;
 			}
