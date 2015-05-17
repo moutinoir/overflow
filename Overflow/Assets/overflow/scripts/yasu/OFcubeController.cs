@@ -75,6 +75,21 @@ public class OFcubeController : MonoBehaviour {
 		}
 	}
 
+	void OnCollisionEnter (Collision collision)
+	{
+		
+		// collision
+		Debug.Log ("collision rock !");
+		// only "Player" destroy
+		if(collision.gameObject.CompareTag("Player"))
+		{
+			if (RB.velocity.y <= 0f && RB.velocity.y > -0.01f) 
+			{
+				Destroy(collision.gameObject);
+			}
+		}
+	}
+
 	/*
 	void OnCollisionEnter(Collision collision) {
 	    foreach (ContactPoint contact in collision.contacts) {
