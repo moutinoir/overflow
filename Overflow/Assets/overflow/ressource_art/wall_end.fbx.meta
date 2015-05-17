@@ -195,6 +195,9 @@ ModelImporter:
     400184: transform8
     400186: transform9
     400188: //RootNode
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Group43440
     7400000: Take 001
     9500000: //RootNode
   materials:
