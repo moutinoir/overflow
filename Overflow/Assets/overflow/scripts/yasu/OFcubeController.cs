@@ -4,7 +4,7 @@ using System.Collections;
 public class OFcubeController : MonoBehaviour {
 
 	public GameObject prefabWarning;
-
+	public LayerMask mask;
 	public GameObject prefabHit;
 
 	float warningDistance = 100f;
@@ -26,13 +26,12 @@ public class OFcubeController : MonoBehaviour {
 	
 	void FixedUpdate(){
 		if (kinematic == false) {
-
 			RaycastHit hit;
-			Physics.Raycast (this.transform.position, -Vector3.up, out hit, warningDistance);
+			Physics.Raycast (this.transform.position, -Vector3.up, out hit, warningDistance, mask);
 
 			if (hit.collider != null) {
 				
-				if (hit.transform.tag == "Stone") {
+				//if (hit.transform.tag == "Stone") {
 
 					foreach (Transform child in hit.transform)
 					{
@@ -45,7 +44,7 @@ public class OFcubeController : MonoBehaviour {
 						Instantiate(prefabWarning, new Vector3(hit.transform.position.x, hit.transform.position.y + 0.5f, hit.transform.position.z), Quaternion.identity);
 					}
 					*/
-				} 
+				//} 
 			}
 
 			if (RB.velocity.y <= 0f && RB.velocity.y > -0.01f) {
@@ -77,13 +76,13 @@ public class OFcubeController : MonoBehaviour {
 
 	void OnCollisionEnter (Collision collision)
 	{
-		
-		// collision
-		Debug.Log ("collision rock !");
 		// only "Player" destroy
-		if(collision.gameObject.CompareTag("Player"))
+		if(collision.gameObject.layer == LayerMask.NameToLayer("Player"))
 		{
-			if (RB.velocity.y <= 0f && RB.velocity.y > -0.01f) 
+			// collision
+			Debug.Log ("rock collides with player !");
+			//if (!(RB.velocity.y <= 0f && RB.velocity.y > -0.01f)) 
+			if(collision.gameObject.transform.position.y < transform.position.y)
 			{
 				Destroy(collision.gameObject);
 			}
