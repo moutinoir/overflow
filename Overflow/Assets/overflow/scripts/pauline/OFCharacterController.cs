@@ -4,6 +4,8 @@ using InControl;
 
 public class OFCharacterController : MonoBehaviour 
 {
+	public Animator animator;
+
 	public float MoveSpeed = 0;
 	public float TurnSpeed = 2;
 	public float GravityScale = 1;
@@ -39,6 +41,8 @@ public class OFCharacterController : MonoBehaviour
 			{
 				isJumping = true;
 			}
+
+			animator.SetBool("jumping", isJumping);
 		}
 
 		if(isJumping)
